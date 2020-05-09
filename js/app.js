@@ -14,7 +14,7 @@ class HTML {
 
     }
 
-    printMessage (message, className) {
+    printMessage(message, className) {
         const messageWrapper = document.createElement('div');
         messageWrapper.classList.add('text-center', 'alert', className);
         messageWrapper.appendChild(document.createTextNode(message));
@@ -25,6 +25,19 @@ class HTML {
         setTimeout(function() {
             document.querySelector('.primary .alert').remove();
         }, 3000)
+    }
+
+    addExpenseToList(name, amount) {
+        const expensesList = document.querySelector('#expenses ul');
+
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+        li.innerHTML = `
+            ${name}
+            <span class="badge badge-primary badge-pill">$ ${amount}</span>
+        `;
+
+        expensesList.appendChild(li);
     }
 }
 
@@ -67,7 +80,7 @@ function eventListeners() {
         if (expenseName === '' || amount === '') {
             html.printMessage('There was an error, all fields are mandatory', 'alert-danger')
         } else {
-            console.log('Correct');
+            html.addExpenseToList(expenseName, amount);
         }
     });
 }
