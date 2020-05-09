@@ -13,6 +13,19 @@ class HTML {
         budgetLeft.innerHTML = `${amount}`;
 
     }
+
+    printMessage (message, className) {
+        const messageWrapper = document.createElement('div');
+        messageWrapper.classList.add('text-center', 'alert', className);
+        messageWrapper.appendChild(document.createTextNode(message));
+
+        //Insert into HTML
+        document.querySelector('.primary').insertBefore(messageWrapper, addExpenseForm);
+
+        setTimeout(function() {
+            document.querySelector('.primary .alert').remove();
+        }, 3000)
+    }
 }
 
 
@@ -46,5 +59,15 @@ function eventListeners() {
 
     addExpenseForm.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // Read the values from the budget form
+        const expenseName = document.querySelector('#expense').value;
+        const amount = document.querySelector('#amount').value;
+
+        if (expenseName === '' || amount === '') {
+            html.printMessage('There was an error, all fields are mandatory', 'alert-danger')
+        } else {
+            console.log('Correct');
+        }
     });
 }
