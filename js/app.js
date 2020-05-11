@@ -5,6 +5,10 @@ class Budget {
         this.budget = Number(budget);
         this.budgetLeft = this.budget;
     }
+
+    substractFromBudget(amount) {
+        return this.budgetLeft -=amount;
+    }
 }
 
 class HTML {
@@ -38,7 +42,13 @@ class HTML {
         `;
 
         expensesList.appendChild(li);
-    }
+}
+        trackBudget(amount) {
+            const budgetLeftDollars = budget.substractFromBudget(amount);
+            budgetLeft.innerHTML = `${budgetLeftDollars}`;
+            console.log(budgetLeftDollars);
+        }
+    
 }
 
 
@@ -81,6 +91,8 @@ function eventListeners() {
             html.printMessage('There was an error, all fields are mandatory', 'alert-danger')
         } else {
             html.addExpenseToList(expenseName, amount);
-        }
-    });
+            html.trackBudget(amount);
+    }
+});
+
 }
