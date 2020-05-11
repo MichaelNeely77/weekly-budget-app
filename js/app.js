@@ -47,8 +47,17 @@ class HTML {
             const budgetLeftDollars = budget.substractFromBudget(amount);
             budgetLeft.innerHTML = `${budgetLeftDollars}`;
             console.log(budgetLeftDollars);
+        
+
+        if ( (budget.budget / 4) > budgetLeftDollars) {
+            budgetLeft.parentElement.parentElement.classList.remove('alert-success', 'alert-warning');
+            budgetLeft.parentElement.parentElement.classList.add('alert-danger');
+
+        } else if ( (budget.budget /2) > budgetLeftDollars) {
+            budgetLeft.parentElement.parentElement.classList.remove('alert-success');
+            budgetLeft.parentElement.parentElement.classList.add('alert-warning');
         }
-    
+    }
 }
 
 
@@ -92,6 +101,7 @@ function eventListeners() {
         } else {
             html.addExpenseToList(expenseName, amount);
             html.trackBudget(amount);
+            html.printMessage('Added...', 'alert-success')
     }
 });
 
